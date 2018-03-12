@@ -1,5 +1,6 @@
 var warble = 'Today has been a lovely day of psychosomatic liberation. Tomorrow, who knows? I do not. Each new day is another confrontation of our inevitable end, the best we can hope for is a long life with good memories.';
 
+
 function justify(str, len) {
   var splitter = str.split(" ");
   var counter = 0;
@@ -28,14 +29,18 @@ function justify(str, len) {
       counter = 0;
       line.push(splitter[i]);
       counter += (splitter[i].length + 1);
-    } else if (i === (splitter.length - 1)  && len != counter) {
+      if (splitter[i] == "dolor.") {
+         newStr += "dolor.";
+      }
+     } else if (i === (splitter.length - 1) && counter > len) {
+      newStr += splitter[i];
+     } else if (i === (splitter.length - 1)) {
       line.push(splitter[i]);
       for (j = 0; j < (line.length - 1); j ++) {
         newStr += line[j];
         newStr += ' ';
       }
       newStr += line[line.length -1];
-    } else if (i === (splitter.length - 1)  && len === counter) {
     } else {
       line.push(splitter[i]);
       counter += 1
