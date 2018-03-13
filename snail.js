@@ -1,32 +1,69 @@
 snail = function(array) {
   let sniffer = [];
-  let counter = 0;
-  function down(burp) {
-    for (j = 0; j < burp.length; j ++) {
-      counter = array.indexOf(burp[j]);
-      sniffer.push(burp[j][burp.length-1]);
+  let stank = 0;
+  let myNewArray = [];
+  function right() {
+    let bark = array[0].length;
+    for (i = 0; i < bark; i ++) {
+      sniffer.push(array[0][0]);
+      array[0].shift();
+    }
+  }
+
+  function down() {
+    array.shift();
+    for (j = 0; j < array.length; j ++) {
+      sniffer.push(array[j][array[j].length-1]);
       array[j].pop();
     }
   }
 
-
-  // var a = fruits.indexOf("Apple");
-
-  function left(barf) {
-
+  function left() {
+    while (array[array.length -1].length > 0) {
+      sniffer.push(array[array.length -1][array[array.length -1].length-1]);
+      array[array.length -1].pop();
+    }
   }
 
-  if (array.length > 0) {
-
+  function up() {
+    for (k = array.length - 2; k > (-1); k --) {
+      sniffer.push(array[k][0]);
+      array[k].shift();
+    }
+    array.pop();
   }
-  for (i = 0; i < array.length; i ++) {
 
+  function flatten() {
+    myNewArray = [].concat.apply([], array);
   }
-  // array[0].map( number => sniffer.push(number));
-  down(array);
-  console.log(counter);
+  flatten();
+
+  while (myNewArray.length > 0) {
+    right();
+    flatten();
+    if (myNewArray.length < 1) {
+      break;
+    }
+    down();
+    flatten();
+    if (myNewArray.length < 1) {
+      break;
+    }
+    left();
+    flatten();
+    if (myNewArray.length < 1) {
+      break;
+    }
+    up();
+    flatten();
+    if (myNewArray.length < 1) {
+      break;
+    }
+  }
   return sniffer;
 }
+
+
 
 let snail1 = snail([[1,2,3,4,5],[6,7,8,9,10],[11,12,13,14,15],[16,17,18,19,20],[21,22,23,24,25]]);
 
