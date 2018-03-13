@@ -64,6 +64,18 @@ snail = function(array) {
 }
 
 
+function snailBetter(array) {
+  var vector = [];
+  while (array.length) {
+    vector.push(...array.shift());
+    array.map(row => vector.push(row.pop()));
+    array.reverse().map(row => row.reverse());
+  }
+  return vector;
+}
+
+
+
 
 let snail1 = snail([[1,2,3,4,5],[6,7,8,9,10],[11,12,13,14,15],[16,17,18,19,20],[21,22,23,24,25]]);
 
