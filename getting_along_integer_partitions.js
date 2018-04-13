@@ -11,59 +11,69 @@ function part(n) {
   }
 
   let combos = [];
-  let total = 0;
+  // let total = 0;
 
   for (let i = 1; i <= n; i ++) {
     combos.push([i]);
   }
 
-
-
-//  Ranger function
-  function ranger(numb) {
-    let subCombos = [];
-    let rangerNumb = 0;
-
-
-    // Set rangerNumb
-    if (numb[0][0]) {
-      for (let i = 0; i < numb[0].length; i ++) {
-        rangerNumb += numb[0][i];
+  for (let i = 2; i <= n; i ++) {
+    for (let j = 2; j < n-2; j++) {
+      if (j+i <= n) {
+        combos.unshift([i, j])
       }
-    } else if (numb.length > 1 && !numb[0]) {
-      for (let i = 0; i < numb.length; i ++) {
-        rangerNumb += numb[i];
+    }
+  }
+
+
+
+
+  for (let j = 2; j < Math.ceil(n/2); j++) {
+    let tempArray = [];
+    console.log(j);
+    for (let z = 0; z < combos.length; z++) {
+      if (combos[z].length == j) {
+        let totaller = 0;
+        for (let g = 0; g < combos[z].length; g ++) {
+          totaller += combos[z][g];
+        }
+        for (let y = 2; y < n-2; y ++) {
+          if (totaller + y <= n) {
+            let subber = combos[z].map(x=>x);
+            subber.push(y);
+            // console.log(subber);
+          }
+        }
       }
-    } else {
-      rangerNumb = numb;
+    }
+// //  While the length of a combo equals j, continue
+//     let a = 0;
+//     while (combos[a].length == j) {
+//         let totaller = 0;
+//         for (let g = 0; g < combos[a].length; g ++) {
+//           totaller += combos[a][g];
+//         }
+// //         // Push another combo, adding another number
+// //         // if sum is <= n
+//         for (let h = n - 2; h > 1; h --) {
+//
+//           if (totaller + h <= n) {
+//             let subber = combos[a].map(x => x);
+//             subber.push(h);
+//             tempArray.unshift(subber);
+//           }
+//         }
+//         a++;
+//       }
+//       if (tempArray.length > 0) {
+//         for (let bar = 0; bar < tempArray.length; bar ++) {
+//           combos.unshift[tempArray[bar]];
+//         }
+//       }
     }
 
-    
-
-  }
-
-
-
-// Starting from n - 2 iterating down to 2;
-  for (let i = n - 2; i > 1; i --) {
-    ranger([i]);
-  }
-
-  console.log('combosLength: ');
-  return combos.length;
-
-
-  // prods.sort(function(a,b){return a-b});
-
-  // const map1 = prods.map(x => total += x);
-  //
-  // let range = prods[prods.length -1] - 1;
-  // let mean = (total / prods.length).toFixed(2);
-  // let median = 0;
-  // median = (prods[Math.ceil((prods.length - 1) / 2)]).toFixed(2);
-  // if (prods.length % 2 == 0) {
-  //   median = (median + (prods[Math.ceil((prods.length - 1) / 2)]))/2;
-  // }
+  console.log(combos);
+  return 'comboLength: ' + combos.length;
 
 }
 
@@ -73,7 +83,7 @@ function part(n) {
 // console.log(part(5));
 // console.log(part(6));
 // console.log(part(7));
-console.log(part(8));
+console.log(part(10));
 // console.log(part(9));
 // console.log(part(10));
 // console.log(part(11));
