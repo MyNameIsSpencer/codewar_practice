@@ -70,6 +70,9 @@ function part(n) {
 //           combos.unshift[tempArray[bar]];
 //         }
 //       }
+      for (let v=0; v<tempArray.length; v++) {
+        combos.unshift(tempArray[v]);
+      }
     }
 
   console.log(combos);
